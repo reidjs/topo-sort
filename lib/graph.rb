@@ -1,13 +1,15 @@
 class Vertex
-  attr_accessor :value, :in_edges, :out_edges
+  attr_accessor :value, :in_edges, :out_edges, :in_count, :enqueued
   def initialize(value)
     @value = value 
     @in_edges = []
     @out_edges = []
+    @in_count = 0
   end
 
   def remove_edge(edge) 
     in_edges.delete(edge)
+    @in_count -= 1
     out_edges.delete(edge)
   end 
 end
@@ -19,6 +21,7 @@ class Edge
     from_vertex.out_edges << self
     @to_vertex = to_vertex
     to_vertex.in_edges << self
+    to_vertex.in_count += 1
     @cost = cost 
   end
 

@@ -7,8 +7,23 @@
 
 # Import any files you need to
 
+require_relative 'graph'
+require_relative 'topological_sort'
 
-
-def install_order(arr)
-
+def install_order(packages)
+  # result = (1..packages.length).to_a
+  # result.each_with_index do |el, idx|
+  #   result[idx] = Vertex.new(el)
+  # end 
+  vertices = {}
+  packages.each_with_index do |package, idx|
+    # Vertex.new(package[0])
+    package_id = package[0]
+    dependency = package[1]
+    vertices[package_id] ||= Vertex.new(package_id)
+    vertices[dependency] ||= Vertex.new(dependency)
+    Edge.new(vertices[package_id], vertices[dependency])
+    p vertices.keys
+  end 
+  byebug  
 end

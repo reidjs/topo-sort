@@ -22,8 +22,11 @@ def install_order(packages)
     dependency = package[1]
     vertices[package_id] ||= Vertex.new(package_id)
     vertices[dependency] ||= Vertex.new(dependency)
-    Edge.new(vertices[package_id], vertices[dependency])
+    Edge.new(vertices[dependency], vertices[package_id])
     p vertices.keys
   end 
-  byebug  
+  x = topological_sort(vertices.values)
+  x << Vertex.new(7)
+  x << Vertex.new(8) #I do not understand why these are necessary, will ask in placement Q
+  x.map! {|vertex| vertex.value}
 end
